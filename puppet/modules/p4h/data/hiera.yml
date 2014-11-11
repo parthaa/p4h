@@ -1,0 +1,5 @@
+:hierarchy:
+- tree/%{::osfamily}/%{::operatingsystem}/%{::operatingsystemrelease}
+- tree/%{::osfamily}/%{::operatingsystem}
+- tree/%{::osfamily}
+- common

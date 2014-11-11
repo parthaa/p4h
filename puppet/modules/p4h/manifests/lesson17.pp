@@ -44,9 +44,11 @@ Level 42:
 
 Happy hacking!\n",
 	}
+include p4h::params
+  notify { "Stuff":
+  message => "My Comment is ${::p4h::params::comment}"
 
-	# XXX: write your code here...
-
+  }
 }
 
 # vim: ts=8

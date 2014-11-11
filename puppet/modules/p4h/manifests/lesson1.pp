@@ -39,6 +39,27 @@ Happy hacking!\n",
 
 	# XXX: write your code here...
 
+  cron { random:
+    command => "/usr/binecho $RANDOM > /tmp/boo",
+    user    => root,
+    hour    => [2, 4]
+  }
+
+  file { '/tmp/external-boo':
+   ensure  => "directory"
+  }
+
+  file { '/tmp/external-boo/foo':
+   ensure  => "directory",
+   require => File["/tmp/external-boo"]
+  }
+
+  host { 'justin':
+    ip => '10.4.164.55',
+    host_aliases => [ 'justinsherrill' ],
+  }
+
+
 }
 
 # vim: ts=8

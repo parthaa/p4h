@@ -32,7 +32,55 @@ Bonus:
 Happy hacking!\n",
 	}
 
-	# XXX: write your code here...
+ $foo = concat(['2','4'], '3')
+ notice("test")
+ notice(inline_template("<%= @foo.inspect %>"))
+ $count = count($foo)
+ notice("Count ${count}")
+ $deleted = delete($foo, 2)
+ notice(inline_template("<%= @deleted.inspect %>"))
+
+ $flattened = flatten(['a', ['1', ['2']]])
+ notice(inline_template("Flattened => <%= @flattened.inspect %>"))
+
+ $hash = {"a" => 1, "b" => 2, "c" => 3, "d" => 4}
+
+ if has_key($hash, 'a') {
+    notice("great!! has key")
+  }
+
+ if has_key($hash, 'x') {
+    notice("boo!! has key")
+  }
+
+ notice(join($foo, ":::"))
+ notice(join(keys($hash), ":::"))
+
+ if member($foo, "3") {
+  notice("3 is a member")
+ }
+
+
+ if member($foo, "32") {
+  notice("Boo !! 32 is not a member")
+ }
+
+ $merged = merge($hash, {'d' => 100})
+ notice(inline_template("Merged => <%= @merged.inspect %>"))
+
+ $parsed = parseyaml(inline_template("<%= @merged.to_yaml %>"))
+
+ if keys($parsed) == keys($merged) {
+  notice("Yaay !  parsed keys are equal")
+ }
+ else {
+   notice("Boo! parsed keys are not equal")
+   notice(inline_template("parsed => <%= @parsed.inspect %>"))
+   notice(inline_template("Merged => <%= @merged.inspect %>"))
+ }
+
+ $tp = type($hash)
+ notice("$hash is of type ${tp}")
 
 }
 

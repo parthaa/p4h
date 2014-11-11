@@ -41,7 +41,21 @@ Level 42:
 Happy hacking!\n",
 	}
 
-	# XXX: write your code here...
+include common::again
+
+$some_str = 'boo is awesome'
+# you can notify from any type that can generate a notification!
+# typically, using exec is the most common, but is not required!
+  file { "/tmp/foo":
+      content => "${some_str} ${system_uptime}\n",
+      notify => Common::Again::Delta['some-name'], # notify puppet!
+  }
+
+# when notified, this will run puppet again, delta sec after it ends!
+common::again::delta { 'some-name':
+    delta => 10, # 2 minutes (pick your own value)
+}
+
 
 }
 

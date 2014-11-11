@@ -46,7 +46,18 @@ Level 42:
 Happy hacking!\n",
 	}
 
-	# XXX: write your code here...
+  if $hostname == "lesson13a" {
+    @@file { '/tmp/test.txt':
+    ensure => 'present',
+    content => "Test ${hostname} ${name}",
+    #abc => 'different_on_each_node',
+    tag => 'magic',
+    }
+  }
+
+  File <<|tag == 'magic'|>>
+
+
 
 }
 

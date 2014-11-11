@@ -36,9 +36,21 @@ Bonus:
 
 Happy hacking!\n",
 	}
+  $inliner = inline_template("Test <%= @hostname %>")
+  notice("The value is: ${inliner}")
+  $brian  = regsubst($inliner, '([^\\.]*)', '\1')
+  notice("The value is: ${brian}")
+  $sha = sha1("eric")
+  notice("Sha1 eric : ${sha}")
+  $splitted = split("5.6.7.8.9", ".")
+  notice("splitted value ${splitted}")
+  $sprinter = sprintf("%s is a genius %d", "Davidd", 1 )
+  notice("sprinter ->  ${sprinter} ")
 
-	# XXX: write your code here...
-
+ file { '/tmp/david':
+   ensure  => file,
+   content => template('p4h/boo.erb'),
+  }
 }
 
 # vim: ts=8

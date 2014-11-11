@@ -41,7 +41,60 @@ Happy hacking!\n",
 	}
 
 	# XXX: write your code here...
+  $input = ["dustin", "david" ,"justin"]
 
+  define fooo($message = $title) {
+    notify{ $message:
+      message => "Hello ${message}!"
+    }
+  }
+
+  fooo{
+   $input:
+  }
+
+  define recursion($array) {
+    if !empty($array){
+      $element = $array[0]
+      $new_array = delete_at($array, 0)
+      $count = count($new_array)
+      notify { "message->${count}":
+            message => "Hello ${element}"
+      }
+
+
+      if $count > 0 {
+        recursion{ "array-${count}":
+                 array => $new_array}
+      }
+    }
+  }
+
+  recursion { "start" : array => $input }
+
+  $data = {
+      'Og' => {
+          comment => 'the lion',
+      },
+      'Justin' => {
+          comment => 'bitten by lion',
+      },
+      'David' => {
+          comment => 'Mr Catello',
+      },
+      'Zeus' => {
+          comment => 'calls the monkey',
+      }
+  }
+
+  define message_printers($messenger = $title, $comment) {
+    notify { $messenger:
+          message => "Hello I am ${messenger}. ${comment}"
+    }
+
+  }
+
+  create_resources('message_printers', $data)
 }
 
 # vim: ts=8

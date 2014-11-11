@@ -31,8 +31,9 @@ Bonus:
 
 Happy hacking!\n",
 	}
+  notice("Normal Puppeteer")
 
-	# XXX: write your code here...
+  notice(myfunc("/etc/passwd"))
 
 }
 

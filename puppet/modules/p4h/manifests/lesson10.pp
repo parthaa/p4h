@@ -16,9 +16,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # README: this is a module built for use with: Oh My Vagrant!
+import "common"
 
 class p4h::lesson10() {
-
 	file { '/root/README':
 		content => "##lesson10
 For this lesson, please do the following:
@@ -32,7 +32,33 @@ Bonus:
 Happy hacking!\n",
 	}
 
-	# XXX: write your code here...
+  $whole_dir = "/tmp/whole1"
+  $frag_dir = "${whole_dir}/frag.d"
+
+  file { $whole_dir:
+  ensure => directory
+  }
+
+
+  # file { $frag_dir:
+  # ensure => directory,
+  # require => File[$whole_dir]
+  # }
+  frag { "${frag_dir}/frag1.frag":
+    content => inline_template('Fragment 1 is here'),
+    require => File[$whole_dir],   # the folder to hold the frags should exist first
+  }
+
+  frag { "${frag_dir}/frag2.frag":
+    content => inline_template('Fragment 2 is here'),
+    require => File[$whole_dir],   # the folder to hold the frags should exist first
+  }
+
+  whole { "${whole_dir}/my_whole":
+    dir => $frag_dir,
+    pattern => '*.frag',
+    require => File[$whole_dir]
+  }
 
 }
 

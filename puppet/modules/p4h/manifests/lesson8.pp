@@ -44,8 +44,35 @@ Level 42:
 Happy hacking!\n",
 	}
 
-	# XXX: write your code here...
+  $vardir = "/tmp/boo"
 
+
+  file { "${vardir}/":
+    ensure => "directory"
+  }
+
+
+  file { "${vardir}/users":
+    ensure => directory,    # make sure this is a directory
+    recurse => true,    # recursively manage directory
+    purge => true,      # purge all unmanaged files
+    force => true,      # also purge subdirs and links
+    owner => root, group => nobody, mode => 600, backup => false,
+    require => File["${vardir}/"],
+  }
+
+
+  file { "${vardir}/users/partha":
+    ensure => "file",
+    content => "test",
+    require => File["${vardir}/users"],
+
+  }
+
+
+  $data_yaml = inline_template("<%= {\"great\" => \"foo\"}.to_yaml %>")
+  $my_hash = parseyaml($data_yaml)
+	notice($my_hash["great"])
 }
 
 # vim: ts=8

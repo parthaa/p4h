@@ -43,8 +43,29 @@ Bonus:
 
 Happy hacking!\n",
 	}
+  notice(inline_template("<%= @my_fact %>"))
 
-	# XXX: write your code here...
+    file { "/var/lib/puppet/tmp/p4h/":
+     ensure  => "directory",
+     alias =>"module_dir"
+    }
+
+
+  define custom($filename = $title ) {
+    file { "/var/lib/puppet/tmp/p4h/${filename}":
+     ensure  => "file",
+     content => "Great ${filename}",
+     require => File["module_dir"]
+    }
+  }
+
+  $names = ["justin", "eric","brad","david"]
+  custom{  $names:}
+
+  notice(inline_template("text fact => <%= @text_fact %>"))
+
+  notice(inline_template("PY fact => <%= @key1 %>"))
+  notice(inline_template("PY fact => <%= @py_fact %>"))
 
 }
 

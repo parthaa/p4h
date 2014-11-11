@@ -38,7 +38,24 @@ Bonus:
 Happy hacking!\n",
 	}
 
-	# XXX: write your code here...
+	# Define: name
+  # Parameters:
+  # arguments
+  #
+  define duplicate_complainer ($alwaysunique) {
+    notify { "$title":
+      message => $alwaysunique,
+      alias => ["alwaysunique-${alwaysunique}"]
+    }
+  }
+
+  duplicate_complainer { "the truth":
+    alwaysunique => "the truth!"
+  }
+
+  duplicate_complainer { "cheater":
+    alwaysunique => "the truth!"
+  }
 
 }
 

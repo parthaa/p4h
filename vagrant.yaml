@@ -11,7 +11,18 @@
 :docker: false
 :cachier: false
 :vms:
-- :name: lesson1
+- :name: lesson10
+- :name: lesson13a
+- :name: lesson13b
+- :name: lesson14
+- :name: lesson15
+- :name: lesson16
+- :name: lesson17
+- :name: lesson18
+- :name: lesson19
+- :name: lesson20
+- :name: lesson21
+- :name: lesson22
 :namespace: p4h
 :count: 0
 :username: ''

@@ -36,8 +36,10 @@ Bonus:
 
 Happy hacking!\n",
 	}
-
-	# XXX: write your code here...
+  file { '/tmp/boo':
+    content => "life"
+  }
+  ensure_resource('file', '/tmp/boo', {"content" => "life"})
 
 }
 
